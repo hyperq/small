@@ -1,0 +1,7 @@
+{
+    "clang-format.executable": "C:/Program Files/LLVM/bin/clang-format.exe",
+    "clang-format.style": "google",
+    "protoc": {
+        "path": "D:/protoc/bin/protoc"
+    },
+}

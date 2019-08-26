@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package go.micro.srv.user;
+
+service User {
+  rpc GetUser(Request) returns (Response) {}
+  rpc GetUserList(Requestlist) returns (Responselist);
+}
+
+message Request {
+  int64 id = 1;
+}
+
+message Response {
+  int64 id = 1;
+  int64 attention = 2;
+  string nickname = 3;
+  string avatar = 4;
+  int64 promotion_id = 5;
+  int64 sex = 6;
+  int64 beans = 7;
+  string phonenumber = 8;
+  string addtime = 9;
+  string addip = 10;
+  string logintime = 11;
+  string loginip = 12;
+  int64 logintimes = 13;
+}
+
+message Requestlist {
+  int64 page = 1;
+  string ob = 2;
+  int64 promotion_id = 3;
+}
+
+message Responselist {
+  repeated Response userlist = 1;
+}
