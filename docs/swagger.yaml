@@ -1,0 +1,146 @@
+basePath: /
+definitions:
+  go_micro_srv_user.Response:
+    properties:
+      addip:
+        type: string
+      addtime:
+        type: string
+      attention:
+        type: integer
+      avatar:
+        type: string
+      beans:
+        type: integer
+      id:
+        type: integer
+      loginip:
+        type: string
+      logintime:
+        type: string
+      logintimes:
+        type: integer
+      nickname:
+        type: string
+      phonenumber:
+        type: string
+      promotion_id:
+        type: integer
+      sex:
+        type: integer
+    type: object
+  go_micro_srv_user.Responselist:
+    properties:
+      userlist:
+        items:
+          $ref: '#/definitions/go_micro_srv_user.Response'
+        type: array
+    type: object
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: small api
+  version: "1.0"
+paths:
+  /user:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户信息
+      parameters:
+      - description: Account ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 用户信息
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/go_micro_srv_user.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: 用户信息
+      tags:
+      - Member
+  /user/list:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户信息
+      parameters:
+      - description: Order by
+        in: query
+        name: ob
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: User ID
+        in: query
+        name: promotion_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 用户信息
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/go_micro_srv_user.Responselist'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: 用户信息
+      tags:
+      - Member
+swagger: "2.0"

@@ -2,13 +2,12 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	dao "small/srv/user/dao"
 	user "small/srv/user/protoc/user"
 
-	log "small/lib/log"
+	"small/lib/log"
 
 	jsoniter "github.com/json-iterator/go"
 
@@ -35,17 +34,17 @@ func (s *User) GetUser(ctx context.Context, req *user.Request, rsp *user.Respons
 	d := dao.New()
 	res, err := d.QueryUserByID(req.Id)
 	if err != nil {
-		fmt.Println(err)
+		log.Error(err)
 		return err
 	}
 	jres, err := json.Marshal(res)
 	if err != nil {
-		log.Debug(err)
+		log.Error(err)
 		return err
 	}
 	err = json.Unmarshal(jres, rsp)
 	if err != nil {
-		fmt.Println(err)
+		log.Error(err)
 		return err
 	}
 	return nil
@@ -60,12 +59,11 @@ func (s *User) GetUserList(ctx context.Context, req *user.Requestlist, rsp *user
 		return err
 	}
 	jres, err := json.Marshal(res)
-	log.Error(res)
 	if err != nil {
 		log.Error(err)
 		return err
 	}
-	err = json.Unmarshal(jres, &rsp)
+	err = json.Unmarshal(jres, &rsp.Userlist)
 	if err != nil {
 		log.Error(err)
 		return err

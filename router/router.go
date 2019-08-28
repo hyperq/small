@@ -18,6 +18,7 @@ func GetRouter() *gin.Engine {
 
 	r.GET("/user", users.GetUser)
 	r.GET("/user/list", users.GetUserList)
+
 	// v1 := r.Group("/api/v1")
 	// {
 	// }
